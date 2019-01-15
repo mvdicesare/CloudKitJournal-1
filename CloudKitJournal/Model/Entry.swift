@@ -11,11 +11,13 @@ import CloudKit
 
 class Entry{
   
+  //MARK: - Properties
   var title: String
   var body: String
   let timestamp: Date
   let ckRecordID: CKRecord.ID
   
+  //MARK: - Initializers
   init(title: String, body: String, timestamp: Date = Date(), ckRecordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)){
     self.title = title
     self.body = body
@@ -32,6 +34,7 @@ class Entry{
   }
 }
 
+//MARK: - CKRecord Entry Convenience Initializer
 extension CKRecord{
   convenience init(entry: Entry){
     self.init(recordType: EntryContstants.RecordType, recordID: entry.ckRecordID)
@@ -41,6 +44,7 @@ extension CKRecord{
   }
 }
 
+//MARK: - Entry Constants
 struct EntryContstants{
   static let TitleKey = "title"
   static let BodyKey = "body"
