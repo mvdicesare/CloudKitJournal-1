@@ -54,4 +54,29 @@ class EntryController{
       completion(true)
     }
   }
+  
+  private func deleteLocal(_ entry: Entry){
+    guard let index = entries.index(of: entry) else { return }
+    entries.remove(at: index)
+  }
+  
+  private func deleteFromCloudKit(_ entry: Entry, completion: ((Entry?) -> Void)?){
+    let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [entry.ckRecordID])
+    operation.queuePriority = .high
+    operation.qualityOfService = .userInitiated
+    operation.modifyRecordsCompletionBlock = {(_, _, error: Error?) in
+      if let error = error{
+        print("\(error.localizedDescription) \(error) in function: \(#function)")
+        completion?(nil)
+        return
+      }
+      completion?(entry)
+    }
+    CKContainer.default().add(operation)
+  }
+  
+  func delete(_ entry: Entry, completion: ((Entry?) -> Void)?){
+    deleteLocal(entry)
+    deleteFromCloudKit(entry, completion: completion)
+  }
 }
