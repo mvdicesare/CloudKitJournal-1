@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="bBk-AI-zvJ" rowHeight="58" style="IBUITableViewCellStyleDefault" id="IHW-4g-h0B">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="entryCell" textLabel="bBk-AI-zvJ" rowHeight="58" style="IBUITableViewCellStyleDefault" id="IHW-4g-h0B">
                                 <rect key="frame" x="0.0" y="28" width="375" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IHW-4g-h0B" id="MgX-UD-wAv">
@@ -108,7 +108,11 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="rH0-5E-ZgJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="YGM-qA-8LJ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="YGM-qA-8LJ">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="e3j-Tk-aNQ" id="YjF-Ao-Mtx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bodyTextView" destination="eSa-XH-1Gh" id="vCS-7j-aQp"/>
