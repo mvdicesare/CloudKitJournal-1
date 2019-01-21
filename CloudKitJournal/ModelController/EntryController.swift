@@ -19,6 +19,7 @@ class EntryController{
   var entries: [Entry] = []
   
   //MARK: - CRUD Functions
+  //MARK: - Save
   func save(entry: Entry, completion: @escaping (Bool) -> ()){
     let record = CKRecord(entry: entry)
     CKContainer.default().privateCloudDatabase.save(record) { (record, error) in
@@ -34,11 +35,13 @@ class EntryController{
     }
   }
   
+  //MARK: - Create
   func addEntryWith(title: String, body: String, completion: @escaping (Bool) -> Void){
     let entry = Entry(title: title, body: body)
     save(entry: entry, completion: completion)
   }
   
+  //MARK: - Read
   func fetchEntries(completion: @escaping (Bool) -> Void){
     let predicate = NSPredicate(value: true)
     let query = CKQuery(recordType: EntryContstants.RecordType, predicate: predicate)
@@ -52,6 +55,51 @@ class EntryController{
       let entries = records.compactMap{ Entry(ckRecord: $0) }
       self.entries = entries
       completion(true)
+    }
+  }
+  
+  //MARK: - Delete
+  private func deleteLocal(_ entry: Entry){
+    guard let index = entries.index(of: entry) else { return }
+    entries.remove(at: index)
+  }
+  
+  private func deleteFromCloudKit(_ entry: Entry, completion: ((Entry?) -> Void)?){
+    let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [entry.ckRecordID])
+    operation.queuePriority = .high
+    operation.qualityOfService = .userInitiated
+    operation.modifyRecordsCompletionBlock = {(_, _, error: Error?) in
+      if let error = error{
+        print("\(error.localizedDescription) \(error) in function: \(#function)")
+        completion?(nil)
+        return
+      }
+      completion?(entry)
+    }
+    CKContainer.default().add(operation)
+  }
+  
+  func delete(_ entry: Entry, completion: ((Entry?) -> Void)?){
+    deleteLocal(entry)
+    deleteFromCloudKit(entry, completion: completion)
+  }
+  
+  //MARK: - Update
+  func update(entry: Entry, newTitle: String, newBody: String, completion: ((Entry?) -> Void)?){
+    entry.title = newTitle
+    entry.body = newBody
+    let record = CKRecord(entry: entry)
+    let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+    operation.savePolicy = .changedKeys
+    operation.qualityOfService = .userInitiated
+    operation.modifyRecordsCompletionBlock = {(records, _, error) in
+      if let error = error{
+        print("\(error.localizedDescription) \(error) in function: \(#function)")
+        completion?(nil)
+        return
+      }
+      guard let record = records?.first, let entry = Entry(ckRecord: record) else { completion?(nil) ; return }
+      completion?(entry)
     }
   }
 }
