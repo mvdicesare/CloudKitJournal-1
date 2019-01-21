@@ -14,6 +14,7 @@
 		F797CA4521EE6AAC00511A9C /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CA4421EE6AAC00511A9C /* Entry.swift */; };
 		F797CA4721EE7FC900511A9C /* EntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CA4621EE7FC900511A9C /* EntryController.swift */; };
 		F7FE431E21F2790C00406913 /* EntryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE431D21F2790C00406913 /* EntryListTableViewController.swift */; };
+		F7FE432021F27B7900406913 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE431F21F27B7900406913 /* EntryDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F797CA4421EE6AAC00511A9C /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		F797CA4621EE7FC900511A9C /* EntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryController.swift; sourceTree = "<group>"; };
 		F7FE431D21F2790C00406913 /* EntryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListTableViewController.swift; sourceTree = "<group>"; };
+		F7FE431F21F27B7900406913 /* EntryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				F7FE431D21F2790C00406913 /* EntryListTableViewController.swift */,
+				F7FE431F21F27B7900406913 /* EntryDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				F797CA4721EE7FC900511A9C /* EntryController.swift in Sources */,
 				F797CA4521EE6AAC00511A9C /* Entry.swift in Sources */,
 				F7FE431E21F2790C00406913 /* EntryListTableViewController.swift in Sources */,
+				F7FE432021F27B7900406913 /* EntryDetailViewController.swift in Sources */,
 				F797CA2E21EE641500511A9C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
