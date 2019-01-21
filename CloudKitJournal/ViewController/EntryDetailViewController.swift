@@ -34,6 +34,39 @@ class EntryDetailViewController: UIViewController {
     bodyTextView.text = entry.body
   }
   
+  func saveNewEntry(completion: @escaping (Bool) -> Void){
+    guard let title = titleTextField.text,
+      !title.isEmpty,
+      !bodyTextView.text.isEmpty else { presentErrorAlert() ; return }
+    EntryController.shared.addEntryWith(title: title, body: bodyTextView.text, completion: completion)
+  }
+  
+  func updateEntry(completion: @escaping (Bool) -> Void){
+    guard let entry = entry,
+      let title = titleTextField.text,
+      !title.isEmpty,
+      !bodyTextView.text.isEmpty else { presentErrorAlert() ; return }
+    EntryController.shared.update(entry: entry, newTitle: title, newBody: bodyTextView.text, completion: completion)
+  }
+  
+  func presentErrorAlert(){
+    let alertController = UIAlertController(title: "Whoops", message: "Something went wrong saving that entry ):", preferredStyle: .alert)
+    let confirmAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+    alertController.addAction(confirmAction)
+    self.present(alertController, animated: true)
+  }
+  
+  func respondToSave(success: Bool){
+    DispatchQueue.main.async {
+      UIApplication.shared.isNetworkActivityIndicatorVisible = false
+      if success{
+        self.navigationController?.popViewController(animated: true)
+      }else {
+        self.presentErrorAlert()
+      }
+    }
+  }
+  
   //MARK: - IBActions
   @IBAction func clearButtonTapped(_ sender: Any) {
     titleTextField.text = ""
@@ -46,14 +79,8 @@ class EntryDetailViewController: UIViewController {
   }
   
   @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-    guard let title = titleTextField.text,
-      !title.isEmpty,
-      !bodyTextView.text.isEmpty else { return }
-    EntryController.shared.addEntryWith(title: title, body: bodyTextView.text) { (true) in
-      DispatchQueue.main.async {
-        self.navigationController?.popViewController(animated: true)
-      }
-    }
+    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    entry == nil ? saveNewEntry(completion: respondToSave(success:)) : updateEntry(completion: respondToSave(success:))
   }
 }
 

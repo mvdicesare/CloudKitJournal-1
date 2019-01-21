@@ -39,6 +39,19 @@ class EntryListTableViewController: UITableViewController {
     return cell
   }
   
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete{
+      UIApplication.shared.isNetworkActivityIndicatorVisible = true
+      let entry = EntryController.shared.entries[indexPath.row]
+      EntryController.shared.delete(entry) { (_) in
+        DispatchQueue.main.async {
+          UIApplication.shared.isNetworkActivityIndicatorVisible = false
+          self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+      }
+    }
+  }
+  
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "toEditEntry"{
