@@ -34,6 +34,11 @@ class EntryListTableViewController: UITableViewController {
   
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
+    if segue.identifier == "toEditEntry"{
+      let destinationVC = segue.destination as? EntryDetailViewController
+      guard let indexPath = tableView.indexPathForSelectedRow else { return }
+      let entry = EntryController.shared.entries[indexPath.row]
+      destinationVC?.entry = entry
+    }
   }
 }

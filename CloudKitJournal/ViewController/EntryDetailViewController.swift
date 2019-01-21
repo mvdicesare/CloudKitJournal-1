@@ -15,12 +15,16 @@ class EntryDetailViewController: UIViewController {
   @IBOutlet weak var bodyTextView: UITextView!
   
   //MARK: - Properties
-  var entry: Entry?
+  var entry: Entry?{
+    didSet{
+      loadViewIfNeeded()
+      updateViews()
+    }
+  }
   
   //MARK: - View Life Cycle Functions
   override func viewDidLoad() {
     super.viewDidLoad()
-    
   }
   
   //MARK: - Functions

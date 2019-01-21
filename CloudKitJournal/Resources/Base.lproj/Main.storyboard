@@ -35,6 +35,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="e3j-Tk-aNQ" kind="show" identifier="toEditEntry" id="Iik-Id-gMG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -45,7 +48,7 @@
                     <navigationItem key="navigationItem" title="Entries" id="Ba3-sC-xqE">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Sjz-s8-fMP">
                             <connections>
-                                <segue destination="e3j-Tk-aNQ" kind="show" id="8Pj-m1-hKi"/>
+                                <segue destination="e3j-Tk-aNQ" kind="show" identifier="toAddEntry" id="8Pj-m1-hKi"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -138,4 +141,7 @@
             <point key="canvasLocation" x="-394" y="94"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Iik-Id-gMG"/>
+    </inferredMetricsTieBreakers>
 </document>
