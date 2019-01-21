@@ -44,6 +44,17 @@ class EntryDetailViewController: UIViewController {
     bodyTextView.resignFirstResponder()
     titleTextField.resignFirstResponder()
   }
+  
+  @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+    guard let title = titleTextField.text,
+      !title.isEmpty,
+      !bodyTextView.text.isEmpty else { return }
+    EntryController.shared.addEntryWith(title: title, body: bodyTextView.text) { (true) in
+      DispatchQueue.main.async {
+        self.navigationController?.popViewController(animated: true)
+      }
+    }
+  }
 }
 
 //MARK: - UITextFieldDelegate
