@@ -76,7 +76,7 @@ class EntryController{
       }
       completion?(entry)
     }
-    CKContainer.default().add(operation)
+    CKContainer.default().privateCloudDatabase.add(operation)
   }
   
   func delete(_ entry: Entry, completion: ((Entry?) -> Void)?){
@@ -85,7 +85,7 @@ class EntryController{
   }
   
   //MARK: - Update
-  func update(entry: Entry, newTitle: String, newBody: String, completion: ((Entry?) -> Void)?){
+  func update(entry: Entry, newTitle: String, newBody: String, completion: @escaping (Bool) -> Void){
     entry.title = newTitle
     entry.body = newBody
     let record = CKRecord(entry: entry)
@@ -95,11 +95,11 @@ class EntryController{
     operation.modifyRecordsCompletionBlock = {(records, _, error) in
       if let error = error{
         print("\(error.localizedDescription) \(error) in function: \(#function)")
-        completion?(nil)
+        completion(false)
         return
       }
-      guard let record = records?.first, let entry = Entry(ckRecord: record) else { completion?(nil) ; return }
-      completion?(entry)
+      completion(true)
     }
+    CKContainer.default().privateCloudDatabase.add(operation)
   }
 }
