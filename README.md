@@ -9,7 +9,7 @@ Students who complete this project independently are able to:
 
 * Create a custom model object with a memberwise initializer and an initializer that takes in a CKRecord
 * In the initializer that takes in a CKRecord, use the key-value pairs from the CKRecord to create the entries properties as you would a dictionary
-* Add property for the CKRecordID
+* Add properties for the CKRecordID
 * Add an extension on CKRecord that initializes an instance of CKRecord with your custom model object. Here is where you set the key-value pairs.
 * Understand, create, and use a shared instance
 * Create a model object controller with create, read, update, and delete functions
@@ -29,7 +29,7 @@ Students who complete this project independently are able to:
 * Upon launch, fetch the CKRecords from the private database and turn those records into your model object.
 
 ****Part One - Model Objects and Controllers****
-_*Before you begin make sure you have enabled iCloud in your apps Cababilities settings, unchecked the “key-value storage” setting and checked “CloudKit” setting.  It may take sometime for a new CKContainer to appear in the CloudKit dashboard so its important you complete this step first.*_
+_*Before you begin, make sure you have enabled iCloud in your apps Capabilities settings, unchecked the “key-value storage” setting and checked “CloudKit” setting.  It may take some time for a new CKContainer to appear in the CloudKit dashboard so it's important you complete this step first.*_
 
 ## Before you Begin
 * Go into the app target file and select “Capabilities”.
@@ -41,16 +41,16 @@ _*Before you begin make sure you have enabled iCloud in your apps Cababilities s
 ## Part 1 - Entry & EntryController
 **Entry**
 
-Create an Entry model class that will hold title, text, and ckRecordID properties for each entry.
+Create an Entry model class that will hold a title, text, and ckRecordID properties for each entry.
 
 * Add a new `Entry.swift` file and define a new `Entry` class
 * Import `CloudKit`
-* Add properties for , title, body text, timestamp (Date) and ckRecordID of type `CKRecordID` or `CKRecord.ID` as of Swift 4.2
-* Add a memberwise initializer that takes parameters for each property.  Give the timestamp property you pass in a defalut parameter value of `Date()`.  Give the CkRecordID you pass in a default parameter value of `CKRecord.ID(recordName: UUID().uuidString))`.
+* Add properties for title, body text, timestamp (Date) and ckRecordID of type `CKRecordID` or `CKRecord.ID` as of Swift 4.2
+* Add a memberwise initializer that takes parameters for each property.  Give the timestamp property you pass in a default parameter value of `Date()`.  Give the CkRecordID you pass in a default parameter value of `CKRecord.ID(recordName: UUID().uuidString))`.
 * This will allow you to refer back to entry objects CKRecord without an optional CKRecordID
 * Add a failable convenience initializer that takes in only a `CKRecord` 
-* Look up the documentation for `CKRecord`. Notice it acts as a dictionary.
-* Get the value from your properties keys. Typically the value will be the string version of your property names. Its a good idea to create a set of constants outside of your class to make sure these keys stay uniform.
+* Look up the documentation for `CKRecord`. Notice it acts like a dictionary.
+* Get the value from your properties keys. Typically the value will be the string version of your property names. It's a good idea to create a set of constants outside of your class to make sure these keys stay uniform.
 
 ```swift
 struct EntryConstants{
@@ -60,19 +60,19 @@ struct EntryConstants{
     }
 ```
 
-* You can then use these keys to pull values out of the CKRecord coming from your convenience initalizer.
-* You will need to cast these properties as their repsective types while you unwrap them at the beginning of your conveniece initializer.  See the example below for reference.  If any of the three properties are not found in the CKRecord for the specified key the initializer should fail and return nil.
+* You can then use these keys to pull values out of the CKRecord coming from your convenience initializer.
+* You will need to cast these properties as their respective types while you unwrap them at the beginning of your convenience initializer.  See the example below for reference.  If any of the three properties are not found in the CKRecord for the specified key the initializer should fail and return nil.
 
 ```swift
  guard let title = ckRecord[EntryConstants.TitleKey] as? String else {return nil}
 ```
-* Call the memberwise initializer you wrote before, using the values you unwrapped from the CKRecord as the initalizer’s arguments.  Do not use either of the default values provided in the memberwise initalizer.  User the the `recordID` property on the `ckRecord` taken in by the convenience initializer as the argument for initalizers `ckRecordID` parameter.
+* Call the memberwise initializer you wrote before, using the values you unwrapped from the CKRecord as the initializer's arguments.  Do not use either of the default values provided in the memberwise initializer.  User the `recordID` property on the `ckRecord` taken in by the convenience initializer as the argument for initializers `ckRecordID` parameter.
 
 Write an initializer for CKRecord using only an instance of your Entry model object
 
-* Add an extension to `CKRecord` and then create a convenience initializerIn an Extension on `CKRecord` 
+* Add an extension to `CKRecord` and then create a convenience initializer in an Extension on `CKRecord` 
 * Create a convenience initializer that takes in an Entry as it’s only parameter 
-* Call the designated initializer of the `CKRecord` which takes in a `recordType` and a `recordID`.  The record type is going to be a string representation of your model object (“Entry”).  Add this as a third static property to your `EntryConstants` struct.  The record ID is going to be the `ckRecordID` property on the entry object your initializer takes in as a parameter
+* Call the designated initializer of the `CKRecord` which takes in a `recordType` and a `recordID`.  The record type is going to be a string representation of your model object (“Entry”).  Add this as a fourth static property to your `EntryConstants` struct. The record ID is going to be the `ckRecordID` property on the entry object your initializer takes in as a parameter
 * This is where you set the key-value pairs for the `CKRecord`.  After the designated initializer, you can call self.setValue(value: forKey:) (The key is going to be a string representation of your property from your `EntryConstants` struct, the value is going to be the entry parameter’s value). 
 
 ```swift
@@ -91,7 +91,7 @@ extension CKRecord{
 Create a model object controller called `EntryController` that will manage adding, reading, updating, and removing entries. We will follow the shared instance design pattern because we want one consistent source of truth for our entry objects that are held on the controller.
 
 * Add a new `EntryController.swift` file and define a new `EntryController` class inside.
-*  Add an entries array property, and set its value to an empty array
+* Add an entries array property, and set its value to an empty array
 
 **Save**
 
@@ -103,23 +103,23 @@ Create a model object controller called `EntryController` that will manage addin
 CKContainer.default().privateCloudDatabase.save(record: CKRecord, completionHandler:(CKRecord?, Error?) -> Void)
 ```
 
-* Handle the error that this function may complete with and pass `false` into the completion.  If you successfully saved your record, unwrap it and call the convenience initalizer to create an entry from the record.  Append this newly initalized entry to your entries array. Finally, call completion and pass in `true`.
-*This process of initalizing another entry from our record may seem redundant, but it ensures the data in CloudKit will match what the user sees locally (i.e. if the record fails to save for some reason, it will not show up on the users phone).*
+* Handle the error that this function may complete with and pass `false` into the completion.  If you successfully saved your record, unwrap it and call the convenience initializer to create an entry from the record.  Append this newly initialized entry to your entries array. Finally, call completion and pass in `true`.
+*This process of initializing another entry from our record may seem redundant, but it ensures the data in CloudKit will match what the user sees locally (i.e. if the record fails to save for some reason, it will not show up on the user's phone).*
 
 **Create**
 
 * Create a `addEntryWith(title: ...)` function that takes in a `title`, and `body`, and `completion: @escaping (Bool) -> Void` creates a new instance of `Entry`, and adds it to the entries array
-* Using the `title` and `text properties`, create a new Entry with it’s memberwise initializers.
+* Using the `title` and `text properties`, create a new Entry with its memberwise initializers.
 * With the Entry you just created, call your `save(entry:completion:)` method created earlier
-* In the completion handler of the the `save(entry:completion:)`, if you were able to successfully save it to CloudKit, call `completion(true)`. If not, call `completion(false)`
+* In the completion handler of the `save(entry:completion:)`, if you were able to successfully save it to CloudKit, call `completion(true)`. If not, call `completion(false)`
 
 **Read (Fetch)**
 
 *  Create a `fetchEntries(completion: @escaping (Bool)->())` function that only has a completion handler. This will fetch all the entries in your private database.
-* In order to perform a query to the private databse, you will need to create a `CKQuery`. 
-* A `CKQuery` takes in two parameters, `recordType: String` and `predicate: NSPredicate` The recordType will be a the string representation of our CKRecord. You can call this string off of the static property in your `Constants` struct. 
-* `NSPredicate` is a definition of logical conditions (true false) used to constrain a search either for a fetch or for in-memory filtering. For this project we want to get all entries back from the private database, so we will be using the initializer that takes in a value, and we will be setting that value to `true` This tells the predicate to just return everything.
-* Now call `CKContainer.default().privateCloudDatabase.perform(query: inZoneWith: completionHandler:)`. Plug in your `CKQuery` for the query, and `nil` for inZoneWith. In smaller apps you typically will keep this value nil. 
+* In order to perform a query to the private database, you will need to create a `CKQuery`. 
+* A `CKQuery` takes in two parameters, `recordType: String` and `predicate: NSPredicate` The recordType will be a string representation of our CKRecord. You can call this string off of the static property in your `Constants` struct. 
+* `NSPredicate` is a definition of logical conditions (true-false) used to constrain a search either for a fetch or for in-memory filtering. For this project, we want to get all entries back from the private database so we will be using the initializer that takes in a value, and we will be setting that value to `true` This tells the predicate to just return everything.
+* Now call `CKContainer.default().privateCloudDatabase.perform(query: inZoneWith: completionHandler:)`. Plug in your `CKQuery` for the query, and `nil` for inZoneWith. In smaller apps, you typically will keep this value nil. 
 * The completionHandler gives us an optional error and an optional array of `CKRecords`s. Check for error, and if there is an error, call `completion(false)` and return
 * Unwrap your array of records, and if it’s nil. call `completion(false)` and return
 * Now that you have an array of `CKRecords`, you can loop through the array and attempt to initialize an `Entry` with them. We are able to do this because we created a the failable initializer in the Model that takes in a `CKRecord`
@@ -147,7 +147,7 @@ You will want this view to reload the table view each time it appears in order t
 * Pay attention to your `reuseIdentifier` in the Storyboard scene and your `dequeueReusableCell(withIdentifier:for:)` function call
 * Set up your cells to display the title of the entry
 * Add a UIBarButtonItem to the UINavigationBar with the plus symbol
-* Select ‘Add’ in the System Item menu from the Identity Inspector to set the button as a plus symbol, these are system bar button items, and include localization and other benefits
+* Select ‘Add’ in the System Item menu from the Identity Inspector to set the button as a plus symbol, these are system bar button items and include localization and other benefits
 * Call the `fetchEntries` function from your `EntryController` in the `ViewDidLoad` of the tableview controller.  In the completion block for `fetchEntries` call `self.tableView.reloadData()` **on the application main thread.**
 
 **Detail View**
@@ -160,7 +160,7 @@ Your Detail View should follow the ‘updateViews’ pattern for updating the vi
 * Add an optional `entry` property to the class (this will be our “landing pad”)
 * Add a UIViewController scene to Main.storyboard and set the class to `EntryDetailViewController`
 * Add a UITextField for the entry’s title text to the top of the scene, add an outlet to the class file called `titleTextField`, and set the delegate relationship
-*(To set the delegate relationship control drag from the UITextField to the current view controller in the scene dock or call*  `myTextField.delegate = self` *in the view controller* `ViewDidLoad` *functions)*
+*(To set the delegate relationship control-drag from the UITextField to the current view controller in the scene dock or call*  `myTextField.delegate = self` *in the view controller* `ViewDidLoad` *functions)*
 * Add an extension to `EntryDetailViewController` with conformance to the `UITextFieldDelegate`
 * Implement the delegate function `textFieldShouldReturn`  and resign first responder to dismiss the keyboard
 * Add a UITextView for the entry’s body text beneath the title text field and add an outlet to the class file `bodyTextView`.
@@ -169,8 +169,8 @@ Your Detail View should follow the ‘updateViews’ pattern for updating the vi
 * Add a UIButton beneath the body text view and add an IBAction called `clearButtonTapped(sender:)` to the class file that clears the text in the `titleTextField` and `bodyTextView`
 * Add a `UIBarButtonItem` to the `UINavigationBar` as a `Save` System Item and add an IBAction to the class file called `saveButtonTapped(sender:)`
 *(You may need to add a segue from* `EntryListTableViewController` *to see a UINavigationBar on the detail view, and a UINavigationItem to add the UIBarButtonItem to the UINavigationBar)*
-* In the `saveButtonTapped(sender:)` action guard against the title and body being empty or nil, then call the `addEntryWith(title:body:compltion)` using the shared instance of the `EntryController`
-* In the completion of  `addEntryWith(title:body:compltion)`  use the current ViewController `navigationController` property to call `popViewController(animated)`  **Make sure you are on the main thread when you call** `popViewController(animated)` . *Without completing the Black Diamonds for each part, our program will have a bug.  When a user goes to edit an entry, the entry will duplicate saving a new edited version but also maintaining the old version, locally and in CloudKit.*
+* In the `saveButtonTapped(sender:)` action, guard against the title and body being empty or nil, then call the `addEntryWith(title:body:completion)` using the shared instance of the `EntryController`
+* In the completion of  `addEntryWith(title:body:completion)`  use the current ViewController `navigationController` property to call `popViewController(animated)`  **Make sure you are on the main thread when you call** `popViewController(animated)` . *Without completing the Black Diamonds for each part, our program will have a bug.  When a user goes to edit an entry, the entry will duplicate saving a new edited version but also maintaining the old version, locally and in CloudKit.*
 * Add an `updateViews()` function that checks if the optional `entry` property holds an entry. If it does, implement the function to update all view elements that reflect details about the model object `entry` (in this case, the titleTextField and bodyTextView)
 * Place a `didSet` on the `entry` property which calls `loadViewIfNeeded`  then `updateViews` anytime the entry is set.
 * You may also notice, after we save an entry, it doesn’t immediately show up in our `tableView` as we pop back to the `EntryListTableViewController`.  Fix this by calling `tableView.reloadData()` in the `viewWillAppear` function on the `EntryListTableViewController`
@@ -198,3 +198,15 @@ Your app should now function properly. Run the app and test for bugs.
 
 
 #ios/READMES
+
+## Contributions
+
+If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
+
+## Copyright
+
+© DevMountain LLC, 2017. Unauthorized use and/or duplication of this material without express and written permission from DevMountain, LLC is strictly prohibited. Excerpts and links may be used, provided that full and clear credit is given to DevMountain with appropriate and specific direction to the original content.
+
+<p align="center">
+<img src="https://s3.amazonaws.com/devmountain/readme-logo.png" width="250">
+</p>
