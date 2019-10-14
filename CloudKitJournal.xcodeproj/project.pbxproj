@@ -12,10 +12,6 @@
 		F797CA3321EE641500511A9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F797CA3121EE641500511A9C /* Main.storyboard */; };
 		F797CA3521EE641600511A9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F797CA3421EE641600511A9C /* Assets.xcassets */; };
 		F797CA3821EE641600511A9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F797CA3621EE641600511A9C /* LaunchScreen.storyboard */; };
-		F797CA4521EE6AAC00511A9C /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CA4421EE6AAC00511A9C /* Entry.swift */; };
-		F797CA4721EE7FC900511A9C /* EntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CA4621EE7FC900511A9C /* EntryController.swift */; };
-		F7FE431E21F2790C00406913 /* EntryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE431D21F2790C00406913 /* EntryListTableViewController.swift */; };
-		F7FE432021F27B7900406913 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE431F21F27B7900406913 /* EntryDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,10 +23,6 @@
 		F797CA3421EE641600511A9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F797CA3721EE641600511A9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F797CA3921EE641600511A9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F797CA4421EE6AAC00511A9C /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
-		F797CA4621EE7FC900511A9C /* EntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryController.swift; sourceTree = "<group>"; };
-		F7FE431D21F2790C00406913 /* EntryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListTableViewController.swift; sourceTree = "<group>"; };
-		F7FE431F21F27B7900406913 /* EntryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,12 +70,12 @@
 				F797CA4221EE69D000511A9C /* ViewController */,
 				F797CA4121EE69C800511A9C /* ModelController */,
 				F797CA4021EE69BF00511A9C /* Model */,
-				F797CA3F21EE69A500511A9C /* Resources */,
+				F797CA3F21EE69A500511A9C /* Supporting Files  */,
 			);
 			path = CloudKitJournal;
 			sourceTree = "<group>";
 		};
-		F797CA3F21EE69A500511A9C /* Resources */ = {
+		F797CA3F21EE69A500511A9C /* Supporting Files  */ = {
 			isa = PBXGroup;
 			children = (
 				F797CA2D21EE641500511A9C /* AppDelegate.swift */,
@@ -92,13 +84,12 @@
 				F797CA3621EE641600511A9C /* LaunchScreen.storyboard */,
 				F797CA3921EE641600511A9C /* Info.plist */,
 			);
-			path = Resources;
+			path = "Supporting Files ";
 			sourceTree = "<group>";
 		};
 		F797CA4021EE69BF00511A9C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F797CA4421EE6AAC00511A9C /* Entry.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -106,7 +97,6 @@
 		F797CA4121EE69C800511A9C /* ModelController */ = {
 			isa = PBXGroup;
 			children = (
-				F797CA4621EE7FC900511A9C /* EntryController.swift */,
 			);
 			path = ModelController;
 			sourceTree = "<group>";
@@ -114,8 +104,6 @@
 		F797CA4221EE69D000511A9C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				F7FE431D21F2790C00406913 /* EntryListTableViewController.swift */,
-				F7FE431F21F27B7900406913 /* EntryDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -206,10 +194,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F797CA4721EE7FC900511A9C /* EntryController.swift in Sources */,
-				F797CA4521EE6AAC00511A9C /* Entry.swift in Sources */,
-				F7FE431E21F2790C00406913 /* EntryListTableViewController.swift in Sources */,
-				F7FE432021F27B7900406913 /* EntryDetailViewController.swift in Sources */,
 				F797CA2E21EE641500511A9C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,7 +343,7 @@
 				CODE_SIGN_ENTITLEMENTS = CloudKitJournal/CloudKitJournal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77U2457882;
-				INFOPLIST_FILE = "$(SRCROOT)/CloudKitJournal/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CloudKitJournal/Supporting Files /Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -378,7 +362,7 @@
 				CODE_SIGN_ENTITLEMENTS = CloudKitJournal/CloudKitJournal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77U2457882;
-				INFOPLIST_FILE = "$(SRCROOT)/CloudKitJournal/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CloudKitJournal/Supporting Files /Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
