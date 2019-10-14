@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2694744E2354FD660020F4A0 /* Entries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694744D2354FD660020F4A0 /* Entries.swift */; };
+		26947450235510B00020F4A0 /* EntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694744F235510B00020F4A0 /* EntryController.swift */; };
+		2694745223551FEC0020F4A0 /* EntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694745123551FEC0020F4A0 /* EntryTableViewController.swift */; };
+		269474542355201F0020F4A0 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269474532355201F0020F4A0 /* EntryViewController.swift */; };
 		F74CAC3821F650460026DC6D /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74CAC3721F650460026DC6D /* CloudKit.framework */; };
 		F797CA2E21EE641500511A9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797CA2D21EE641500511A9C /* AppDelegate.swift */; };
 		F797CA3321EE641500511A9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F797CA3121EE641500511A9C /* Main.storyboard */; };
@@ -15,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2694744D2354FD660020F4A0 /* Entries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entries.swift; sourceTree = "<group>"; };
+		2694744F235510B00020F4A0 /* EntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryController.swift; sourceTree = "<group>"; };
+		2694745123551FEC0020F4A0 /* EntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewController.swift; sourceTree = "<group>"; };
+		269474532355201F0020F4A0 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		F74CAC3521F650440026DC6D /* CloudKitJournal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudKitJournal.entitlements; sourceTree = "<group>"; };
 		F74CAC3721F650460026DC6D /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		F797CA2A21EE641500511A9C /* CloudKitJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudKitJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +98,7 @@
 		F797CA4021EE69BF00511A9C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2694744D2354FD660020F4A0 /* Entries.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -97,6 +106,7 @@
 		F797CA4121EE69C800511A9C /* ModelController */ = {
 			isa = PBXGroup;
 			children = (
+				2694744F235510B00020F4A0 /* EntryController.swift */,
 			);
 			path = ModelController;
 			sourceTree = "<group>";
@@ -104,6 +114,8 @@
 		F797CA4221EE69D000511A9C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2694745123551FEC0020F4A0 /* EntryTableViewController.swift */,
+				269474532355201F0020F4A0 /* EntryViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -194,6 +206,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26947450235510B00020F4A0 /* EntryController.swift in Sources */,
+				269474542355201F0020F4A0 /* EntryViewController.swift in Sources */,
+				2694744E2354FD660020F4A0 /* Entries.swift in Sources */,
+				2694745223551FEC0020F4A0 /* EntryTableViewController.swift in Sources */,
 				F797CA2E21EE641500511A9C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
